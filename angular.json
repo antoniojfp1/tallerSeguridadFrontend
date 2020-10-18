@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "tallerSeguridadFrontend"
+    }
+  },
+  "defaultProject": "tallerSeguridadFrontend",
+  "cli": {
+    "analytics": "7ddc005f-dec3-4244-b074-021dd8e5f08e"
+  }
 }
