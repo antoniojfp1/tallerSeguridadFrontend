@@ -19,20 +19,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>MARK SOTO</td>
-                        <td>MSOTO22</td>
-                        <td>d104d3203b5dd923646b4930b384867e</td>
-                    </tr>
-                    <tr>
-                        <td>CARLOS CASTRO</td>
-                        <td>CCASTRO17</td>
-                        <td>e7f2c2f3690384c1ddad476261dd77ae</td>
-                    </tr>
-                    <tr>
-                        <td>LARRY VASQUEZ</td>
-                        <td>LABA88</td>
-                        <td>6883f8777be89ae1cff9e667a2a825c1</td>
+                    <tr *ngFor="let user of users">
+                        <td>{{user.lastname}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.password}}</td>
                     </tr>
                 </tbody>
             </table>
