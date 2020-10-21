@@ -22,8 +22,13 @@
                   </button>
                 </div>
               </div>
+
               <div class="form-group">
                 <button class="btn btn-outline-primary btn-sd" style="width: 100%;" (click)="encryptFile()" [disabled]="!nombreArchivo">ENCRYPT</button>
+              </div>
+
+              <div class="form-group">
+                <a href="#" (click)="downloadFile()">Click me</a>
               </div>
 
               <div class="form-group">
