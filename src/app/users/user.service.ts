@@ -20,4 +20,9 @@ export class UsersService {
     };
     return this.http.get<Response<User[]>>(url, httpOptions);
   }
+
+  post(user: User): Observable<Response<User>> {
+    const url = `http://localhost:8080/user/`;
+    return this.http.post<Response<User>>(url, user);
+  }
 }
