@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StorageService } from '../shared/storage.service';
+import { Login } from './login';
 import { LoginService } from './login.service';
 
 @Component({
@@ -14,6 +16,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
 
   constructor(private loginService: LoginService,
+    private storage: StorageService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router) { }
@@ -26,14 +29,16 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit() {
-    if (this.form.valid) {
-      console.log('Enviando')
+    if (this.form.valid) {      
       const username = this.form.get('username').value;
       const password = this.form.get('password').value;
-      this.form.get('username').disable();
-      this.form.get('password').disable();
-      this.loginService.post(username, password).subscribe(response => {
-        console.log('Autenticado');
+      this.loginService.post(username, password).subscribe(response => {        
+        const user:Login = response.data;
+        this.storage.create(StorageService.STORAGE_USER,
+          {
+            username: user.username,
+            token: user.token
+          });
         this.router.navigate(['home'], { relativeTo: this.route });
       });
     }
