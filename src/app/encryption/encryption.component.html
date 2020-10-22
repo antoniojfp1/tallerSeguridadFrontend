@@ -32,11 +32,11 @@
               </div>
 
               <div class="form-group" *ngIf="fileEncrypted">
-                <button class="btn btn-outline-primary btn-sd" style="width: 100%;" (click)="downloadFile()" [disabled]="!fileEncrypted">DOWNLOAD</button>                
+                <button class="btn btn-outline-primary btn-sd" style="width: 100%;" (click)="downloadFile()" [disabled]="!fileEncrypted">DOWNLOAD</button>
               </div>
 
               <div class="form-group">
-                  <a class="btn btn-outline-success form-control" >DENCRYPT</a>
+                  <button class="btn btn-outline-success btn-sd" style="width: 100%;" (click)="decryptFile()" [disabled]="!nombreArchivo">DECRYPT</button>
               </div>
             </div>
 
