@@ -36,7 +36,17 @@ export class EncryptionComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.uploadForm.get('profile').value);
     formData.append('password', this.password);
-    this.fileService.post(formData, token).subscribe( response => {
+    this.fileService.post(formData, token, 'encrypt').subscribe( response => {
+      this.fileEncrypted = response.data.content;
+    });
+  }
+
+  decryptFile(){
+    const token = this.storageService.userinfo.token;
+    const formData = new FormData();
+    formData.append('file', this.uploadForm.get('profile').value);
+    formData.append('password', this.password);
+    this.fileService.post(formData, token, 'decrypt').subscribe( response => {
       this.fileEncrypted = response.data.content;
     });
   }

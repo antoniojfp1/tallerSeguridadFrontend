@@ -9,10 +9,13 @@ import { ByteFile } from './bite.file';
 })
 export class FileService {
 
+    URL_ENCRYPT_SERVICE = `http://localhost:8080/file/encrypt`;
+    URL_DECRYPT_SERVICE = `http://localhost:8080/file/decrypt`;
+
     constructor(private http: HttpClient) { }
 
-    post(formData, token: string): Observable<Response<ByteFile>> {
-        const url = `http://localhost:8080/file/encrypt`;
+    post(formData, token: string, type: string): Observable<Response<ByteFile>> {
+        const url = type === 'encrypt' ? `${this.URL_ENCRYPT_SERVICE}`  : `${this.URL_DECRYPT_SERVICE}`;
         const httpOptions = {
             headers: new HttpHeaders({
                 'Authorization': token
