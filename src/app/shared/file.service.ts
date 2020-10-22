@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Response } from './../shared/response';
 import { ByteFile } from './bite.file';
+import { Keys } from './keys';
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +23,16 @@ export class FileService {
             })
         };
         return this.http.post<Response<ByteFile>>(url, formData, httpOptions);
+    }
+
+    get(token: string): Observable<Response<Keys>> {
+        const url = 'http://localhost:8080/signature/generateKeys';
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Authorization': token
+            })
+        };
+        return this.http.get<Response<Keys>>(url, httpOptions);
     }
 
 }

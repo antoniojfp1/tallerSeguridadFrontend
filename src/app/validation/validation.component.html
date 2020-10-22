@@ -11,24 +11,27 @@
 
     <div class="row">
         <div class="col-md-4"></div>
-        <div class="col-md-4"> 
-            <div class="custom-file mb-3">  
-                <input class="custom-file-input" id="txtFile" name="txtFile" type="file" style="width: 100%;" onchange="fileValidationIMG()" >
-                <label class="custom-file-label"  for="validatedCustomFile" id="txtname" >SELECT A FILE...</label>
-                <div class="invalid-feedback">INVALID</div>
-            </div>
-            <div class="form-group">  
-                <input id="txtPublicKey" name="txtPublicKey" placeholder="PUBLIC KEY" type="text" class="form-control" maxlength="100" >
-            </div> 
-            <div class="form-group">  
-                <input id="txtPrivateKey" name="txtPrivateKey" placeholder="PRIVATE KEY" type="text" class="form-control" maxlength="100" >
-            </div> 
+        <div class="col-md-4">
+
             <div class="form-group">
-                <a class=" btn btn-outline-danger form-control"   >SING</a>
+                <button class="btn btn-outline-primary btn-sd" style="width: 100%;" (click)="generateKeys()">GENERATE KEYS</button>
             </div>
-            <div class="form-group">  
-                <a class="btn btn-outline-success form-control" >VALIDATE</a>
+
+            <div class="form-group">
+                <label class="small-font" for="txtEmail"
+                        style="font-weight: bold; font-size: 15px; margin-top: 20px;margin-bottom: 0px;">PUBLIC KEY
+                        </label>
+                <textarea placeholder="Public Key" class="form-control" id="publicKey" rows="3" [(ngModel)]="publicKey"></textarea>
             </div>
+
+            <div class="form-group">
+                <label class="small-font" for="txtEmail"
+                        style="font-weight: bold; font-size: 15px; margin-top: 20px;margin-bottom: 0px;">PRIVATE KEY
+                        </label>
+                <textarea placeholder="Private Key" class="form-control" id="privatekey" rows="3" [(ngModel)]="privateKey"></textarea>
+            </div>
+
         </div>
+
     </div>
 </div>

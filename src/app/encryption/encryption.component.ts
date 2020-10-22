@@ -14,6 +14,7 @@ export class EncryptionComponent implements OnInit {
   uploadForm: FormGroup;
   password: string;
   fileEncrypted: string;
+  fileDecrypted: string;
 
   constructor(private formBuilder: FormBuilder,
               private fileService: FileService,
@@ -47,7 +48,7 @@ export class EncryptionComponent implements OnInit {
     formData.append('file', this.uploadForm.get('profile').value);
     formData.append('password', this.password);
     this.fileService.post(formData, token, 'decrypt').subscribe( response => {
-      this.fileEncrypted = response.data.content;
+      this.fileDecrypted = response.data.content;
     });
   }
 
@@ -63,7 +64,7 @@ export class EncryptionComponent implements OnInit {
     }
   }
 
-  downloadFile() {
+  downloadFileEncrypted() {
     const setting = {
       element: {
         dynamicDownload: null as HTMLElement
@@ -80,7 +81,7 @@ export class EncryptionComponent implements OnInit {
     element.dispatchEvent(event);
   }
 
-  private generarArchivoPlano(nombreArchivo: string, texto: string) {
+  downloadFileDecrypted() {
     const setting = {
       element: {
         dynamicDownload: null as HTMLElement
@@ -91,8 +92,8 @@ export class EncryptionComponent implements OnInit {
     }
     const element = setting.element.dynamicDownload;
     const fileType = 'application/msword';
-    element.setAttribute('href', `data:${fileType};base64,${(texto)}`);
-    element.setAttribute('download', nombreArchivo);
+    element.setAttribute('href', `data:${fileType};base64,${(this.fileDecrypted)}`);
+    element.setAttribute('download', this.nombreArchivo);
     const event = new MouseEvent('click');
     element.dispatchEvent(event);
   }
