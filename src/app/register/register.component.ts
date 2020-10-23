@@ -11,6 +11,7 @@ import { UsersService } from '../users/user.service';
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
+  message: string;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UsersService) { }
@@ -20,13 +21,13 @@ export class RegisterComponent implements OnInit {
       username: ['', Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.pattern(regExps.password)]]
     });
   }
 
   async onSubmit() {
     if (this.form.valid) {
-      
+      console.log('contraseña valida'); 
       const username = this.form.get('username').value;
       const password = this.form.get('password').value;
       const firstname = this.form.get('firstname').value;
@@ -44,7 +45,13 @@ export class RegisterComponent implements OnInit {
       });
 
       
+    } else {
+      this.message = 'Validar campos requeridos y que la contraseña sea válida';
     }
   }
 
 }
+
+export const regExps: { [key: string]: RegExp } = {
+  password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!.%*?&])[A-Za-z\d@$!.%*?&]{8,}$/gm
+};
