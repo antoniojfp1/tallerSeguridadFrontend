@@ -10,13 +10,21 @@ import { Keys } from './keys';
 })
 export class FileService {
 
-    URL_ENCRYPT_SERVICE = `http://localhost:8080/file/encrypt`;
-    URL_DECRYPT_SERVICE = `http://localhost:8080/file/decrypt`;
+    URL_ENCRYPT_AES_SERVICE = `http://localhost:8080/file/encrypt`;
+    URL_DECRYPT_AES_SERVICE = `http://localhost:8080/file/decrypt`;
+    URL_ENCRYPT_RSA_SERVICE = `http://localhost:8080/signature/encryptWithKey`;
+    URL_DECRYPT_RSA_SERVICE = `http://localhost:8080/signature/decryptWithKey`;
 
     constructor(private http: HttpClient) { }
 
-    post(formData, token: string, type: string): Observable<Response<ByteFile>> {
-        const url = type === 'encrypt' ? `${this.URL_ENCRYPT_SERVICE}`  : `${this.URL_DECRYPT_SERVICE}`;
+    post(formData, token: string, type: string, method: String): Observable<Response<ByteFile>> {
+        let url = '';
+        if (type === 'AES') {
+            url = method === 'encrypt' ? `${this.URL_ENCRYPT_AES_SERVICE}`  : `${this.URL_DECRYPT_AES_SERVICE}`;
+        } else {
+            url = method === 'encrypt' ? `${this.URL_ENCRYPT_RSA_SERVICE}`  : `${this.URL_DECRYPT_RSA_SERVICE}`;
+        }
+        
         const httpOptions = {
             headers: new HttpHeaders({
                 'Authorization': token
