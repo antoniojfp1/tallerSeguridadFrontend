@@ -15,6 +15,7 @@ export class EncryptionComponent implements OnInit {
   password: string;
   fileEncrypted: string;
   fileDecrypted: string;
+  message: string;
 
   constructor(private formBuilder: FormBuilder,
               private fileService: FileService,
@@ -39,6 +40,9 @@ export class EncryptionComponent implements OnInit {
     formData.append('password', this.password);
     this.fileService.post(formData, token, 'AES', 'encrypt').subscribe( response => {
       this.fileEncrypted = response.data.content;
+      this.message = '';
+    }, error => {
+      this.message = error.error.message;
     });
   }
 
@@ -49,6 +53,9 @@ export class EncryptionComponent implements OnInit {
     formData.append('password', this.password);
     this.fileService.post(formData, token, 'AES', 'decrypt').subscribe( response => {
       this.fileDecrypted = response.data.content;
+      this.message = '';
+    }, error => {
+      this.message = error.error.message;
     });
   }
 

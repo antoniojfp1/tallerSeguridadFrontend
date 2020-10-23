@@ -18,6 +18,7 @@ export class ValidationComponent implements OnInit {
   fileEncrypted: string;
   fileDecrypted: string;
   md5Hash: string;
+  message: string;
 
   constructor(private fileService: FileService,
               private storageService: StorageService,
@@ -35,6 +36,9 @@ export class ValidationComponent implements OnInit {
     this.fileService.get(token).subscribe(response => {
       this.publicKey = response.data.publicKey.content;
       this.privateKey = response.data.privateKey.content;
+      this.message = '';
+    }, error => {
+      this.message = error.error.message;
     });
   }
 
@@ -81,6 +85,9 @@ export class ValidationComponent implements OnInit {
     this.fileService.post(formData, token, 'RSA', 'encrypt').subscribe( response => {
       this.fileEncrypted = response.data.content;
       this.md5Hash = response.data.md5Hash;
+      this.message = '';
+    }, error => {
+      this.message = error.error.message;
     });
   }
 
@@ -92,6 +99,9 @@ export class ValidationComponent implements OnInit {
     formData.append('md5Hash', this.md5Hash)
     this.fileService.post(formData, token, 'RSA', 'decrypt').subscribe( response => {
       this.fileDecrypted = response.data.content;
+      this.message = '';
+    }, error => {
+      this.message = error.error.message;
     });
   }
 

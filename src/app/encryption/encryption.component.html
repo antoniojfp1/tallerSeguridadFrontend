@@ -42,6 +42,7 @@
               <div class="form-group" *ngIf="fileDecrypted">
                 <button class="btn btn-outline-primary btn-sd" style="width: 100%;" (click)="downloadFileDecrypted()" [disabled]="!fileDecrypted">DOWNLOAD</button>
               </div>
+              <label for="txtMessage" style="color: red;" *ngIf="message">{{message}}</label>
             </div>
 
         </div>
