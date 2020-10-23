@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FileService } from '../shared/file.service';
 import { StorageService } from '../shared/storage.service';
 
@@ -22,7 +23,9 @@ export class ValidationComponent implements OnInit {
 
   constructor(private fileService: FileService,
               private storageService: StorageService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.uploadForm = this.formBuilder.group({
@@ -173,6 +176,10 @@ export class ValidationComponent implements OnInit {
     element.setAttribute('download', this.fileUploaded);
     const event = new MouseEvent('click');
     element.dispatchEvent(event);
+  }
+
+  singOut(){
+    this.router.navigate(['../login'], { relativeTo: this.activatedRoute })
   }
 
 }
