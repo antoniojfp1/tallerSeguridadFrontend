@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
             username: user.username,
             token: user.token
           });
-        this.router.navigate(['home'], { relativeTo: this.route });
+        this.router.navigate(['../home'], { relativeTo: this.route });
       }, error => {
         this.message = error.error.message;
       });

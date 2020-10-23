@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FileService } from '../shared/file.service';
 import { StorageService } from '../shared/storage.service';
 
@@ -19,7 +20,9 @@ export class EncryptionComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private fileService: FileService,
-              private storageService: StorageService) { }
+              private storageService: StorageService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.uploadForm = this.formBuilder.group({
@@ -103,6 +106,10 @@ export class EncryptionComponent implements OnInit {
     element.setAttribute('download', this.nombreArchivo);
     const event = new MouseEvent('click');
     element.dispatchEvent(event);
+  }
+
+  singOut(){
+    this.router.navigate(['../login'], { relativeTo: this.activatedRoute })
   }
 
 }

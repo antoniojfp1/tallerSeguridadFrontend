@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark bg-dark">
     <!-- Navbar content -->
     <a class="navbar-brand" href="#">SECURE APP</a>
-    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Sing Out</button>
+    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="singOut()">Sing Out</button>
 
 
 </nav>
@@ -67,7 +67,7 @@
                 <div class="form-group">
                     <input type="submit" name="upload" class="btn btn-outline-primary btn-lg form-control"
                         value="Sing Up">
-                    <label style="padding-left: 35%;"> OR</label> <a [routerLink]="['./../']" style="color:#0069d9"> Sing
+                    <label style="padding-left: 35%;"> OR</label> <a [routerLink]="['./../login']" style="color:#0069d9"> Sing
                         In</a>
                 </div>
             </div>
