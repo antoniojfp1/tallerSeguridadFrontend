@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
 
   async onSubmit() {    
     if (this.form.valid) {
-      console.log('contraseña valida');      
       const username = this.form.get('username').value;
       const password = this.form.get('password').value;
       this.loginService.post(username, password).subscribe(response => {        
@@ -42,6 +41,8 @@ export class LoginComponent implements OnInit {
             token: user.token
           });
         this.router.navigate(['home'], { relativeTo: this.route });
+      }, error => {
+        this.message = error.message;
       });
     } else {
       this.message = 'Usuario o Contraseña inválido';
