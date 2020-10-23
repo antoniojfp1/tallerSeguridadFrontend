@@ -10,10 +10,10 @@ import { Keys } from './keys';
 })
 export class FileService {
 
-    URL_ENCRYPT_AES_SERVICE = `http://localhost:8080/file/encrypt`;
-    URL_DECRYPT_AES_SERVICE = `http://localhost:8080/file/decrypt`;
-    URL_ENCRYPT_RSA_SERVICE = `http://localhost:8080/signature/encryptWithKey`;
-    URL_DECRYPT_RSA_SERVICE = `http://localhost:8080/signature/decryptWithKey`;
+    URL_ENCRYPT_AES_SERVICE = `http://142.93.193.186:8080/file/encrypt`;
+    URL_DECRYPT_AES_SERVICE = `http://142.93.193.186:8080/file/decrypt`;
+    URL_ENCRYPT_RSA_SERVICE = `http://142.93.193.186:8080/signature/encryptWithKey`;
+    URL_DECRYPT_RSA_SERVICE = `http://142.93.193.186:8080/signature/decryptWithKey`;
 
     constructor(private http: HttpClient) { }
 
@@ -34,7 +34,7 @@ export class FileService {
     }
 
     get(token: string): Observable<Response<Keys>> {
-        const url = 'http://localhost:8080/signature/generateKeys';
+        const url = 'http://142.93.193.186:8080/signature/generateKeys';
         const httpOptions = {
             headers: new HttpHeaders({
                 'Authorization': token
