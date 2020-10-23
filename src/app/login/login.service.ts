@@ -12,7 +12,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   post(username: string, password: string): Observable<Response<Login>> {
-    const url = `http://localhost:8080/login`;
+    const url = `http://142.93.193.186:8080/login`;
     var data = `grant_type=password&username=${username}&password=${password}`;
     const httpOptions = {
       headers: new HttpHeaders({

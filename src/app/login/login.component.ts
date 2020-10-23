@@ -14,22 +14,24 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  message: string;
 
   constructor(private loginService: LoginService,
     private storage: StorageService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) { }    
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.pattern(regExps.password)]]
     });
   }
 
-  async onSubmit() {
-    if (this.form.valid) {      
+  async onSubmit() {    
+    if (this.form.valid) {
+      console.log('contraseña valida');      
       const username = this.form.get('username').value;
       const password = this.form.get('password').value;
       this.loginService.post(username, password).subscribe(response => {        
@@ -41,9 +43,15 @@ export class LoginComponent implements OnInit {
           });
         this.router.navigate(['home'], { relativeTo: this.route });
       });
+    } else {
+      this.message = 'Usuario o Contraseña inválido';
     }
 
   }
 
 
 }
+
+export const regExps: { [key: string]: RegExp } = {
+  password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!.%*?&])[A-Za-z\d@$!.%*?&]{8,}$/gm
+};
