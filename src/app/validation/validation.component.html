@@ -2,7 +2,7 @@
     <a class="navbar-brand" href="#">SECURE APP</a>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" [routerLink]="['./../home']">Home <span class="sr-only">(current)</span></a>
         </li>
     </ul>
     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Sing Out</button>
@@ -17,20 +17,61 @@
                 <button class="btn btn-outline-primary btn-sd" style="width: 100%;" (click)="generateKeys()">GENERATE KEYS</button>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" *ngIf="publicKey">
                 <label class="small-font" for="txtEmail"
                         style="font-weight: bold; font-size: 15px; margin-top: 20px;margin-bottom: 0px;">PUBLIC KEY
                         </label>
-                <textarea placeholder="Public Key" class="form-control" id="publicKey" rows="3" [(ngModel)]="publicKey"></textarea>
+                <button class="btn btn-outline-primary btn-sd" style="width: 100%;" (click)="downloadPublicKey()" [disabled]="!publicKey">DOWNLOAD PUBLIC KEY</button>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" *ngIf="privateKey">
                 <label class="small-font" for="txtEmail"
                         style="font-weight: bold; font-size: 15px; margin-top: 20px;margin-bottom: 0px;">PRIVATE KEY
                         </label>
-                <textarea placeholder="Private Key" class="form-control" id="privatekey" rows="3" [(ngModel)]="privateKey"></textarea>
+                <button class="btn btn-outline-primary btn-sd" style="width: 100%;" (click)="downloadPrivateKey()" [disabled]="!privateKey">DOWNLOAD PRIVATE KEY</button>
             </div>
 
+            <div class="custom-file mb-3" *ngIf="privateKey">
+                <input type="file" id="publicKeyFileHiden" (change)="onPublicKeyFileChange($event)" hidden accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <input type="file" id="fileHiden" (change)="onFileChange($event)" hidden accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <div class="input-group mb-3">
+                  <input placeholder="Key" type="text" class="form-control"  maxlength="100" disabled [(ngModel)]="publicKeyNameFile">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-primary btn-sd" style="width: 100%;" style="display: inline" (click)="selectPublicKey($event)">
+                      File
+                    </button>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input placeholder="File" type="text" class="form-control"  maxlength="100" disabled [(ngModel)]="fileUploaded">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary btn-sd" style="width: 100%;" style="display: inline" (click)="selectFile($event)">
+                        File
+                        </button>
+                    </div>
+                </div>
+  
+                <div class="form-group">
+                    <button class="btn btn-outline-primary btn-sd" style="width: 100%;" (click)="encryptFile()" [disabled]="!publicKeyNameFile && !fileUploaded">ENCRYPT</button>
+                </div>
+
+                <div class="form-group" *ngIf="fileEncrypted">
+                    <label class="small-font" for="exampleFormControlTextarea1">MD5-HASH</label>
+                    <textarea class="form-control" id="md5Hash" rows="3" [(ngModel)]="md5Hash"></textarea>
+                  </div>
+
+                <div class="form-group" *ngIf="fileEncrypted">
+                    <button class="btn btn-outline-primary btn-sd" style="width: 100%;" (click)="downloadFileEncrypted()" [disabled]="!fileEncrypted">DOWNLOAD</button>
+                </div>
+
+                <div class="form-group" *ngIf="fileEncrypted">
+                    <button class="btn btn-outline-success btn-sd" style="width: 100%;" (click)="decryptFile()" [disabled]="!fileUploaded">DECRYPT</button>
+                </div>
+
+                <div class="form-group" *ngIf="fileDecrypted">
+                <button class="btn btn-outline-primary btn-sd" style="width: 100%;" (click)="downloadFileDecrypted()" [disabled]="!fileDecrypted">DOWNLOAD</button>
+                </div>
+            </div>
         </div>
 
     </div>

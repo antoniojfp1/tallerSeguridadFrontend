@@ -37,7 +37,7 @@ export class EncryptionComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.uploadForm.get('profile').value);
     formData.append('password', this.password);
-    this.fileService.post(formData, token, 'encrypt').subscribe( response => {
+    this.fileService.post(formData, token, 'AES', 'encrypt').subscribe( response => {
       this.fileEncrypted = response.data.content;
     });
   }
@@ -47,7 +47,7 @@ export class EncryptionComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.uploadForm.get('profile').value);
     formData.append('password', this.password);
-    this.fileService.post(formData, token, 'decrypt').subscribe( response => {
+    this.fileService.post(formData, token, 'AES', 'decrypt').subscribe( response => {
       this.fileDecrypted = response.data.content;
     });
   }

@@ -11,6 +11,7 @@ import { UsersComponent } from './users/users.component';
 import { EncryptionComponent } from './encryption/encryption.component';
 import { ValidationComponent } from './validation/validation.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './shared/auth.guard';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
