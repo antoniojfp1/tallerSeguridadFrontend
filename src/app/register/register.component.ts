@@ -29,7 +29,6 @@ export class RegisterComponent implements OnInit {
 
   async onSubmit() {
     if (this.form.valid) {
-      console.log('contraseña valida'); 
       const username = this.form.get('username').value;
       const password = this.form.get('password').value;
       const firstname = this.form.get('firstname').value;
@@ -44,6 +43,8 @@ export class RegisterComponent implements OnInit {
       
       this.userService.post(user).subscribe(response => {
         this.router.navigate(['./../']);
+      }, error => {
+        this.message = error.error.message;
       });
 
       
