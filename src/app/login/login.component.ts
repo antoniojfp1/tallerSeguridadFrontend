@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           });
         this.router.navigate(['home'], { relativeTo: this.route });
       }, error => {
-        this.message = error.message;
+        this.message = error.error.message;
       });
     } else {
       this.message = 'Usuario o Contraseña inválido';
