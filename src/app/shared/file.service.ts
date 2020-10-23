@@ -17,7 +17,7 @@ export class FileService {
 
     constructor(private http: HttpClient) { }
 
-    post(formData, token: string, type: string, method: String): Observable<Response<ByteFile>> {
+    post(formData, token: string, type: string, method: string): Observable<Response<ByteFile>> {
         let url = '';
         if (type === 'AES') {
             url = method === 'encrypt' ? `${this.URL_ENCRYPT_AES_SERVICE}`  : `${this.URL_DECRYPT_AES_SERVICE}`;
