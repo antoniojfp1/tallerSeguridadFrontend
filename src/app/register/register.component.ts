@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from '../users/user';
 import { UsersService } from '../users/user.service';
 
@@ -14,7 +15,8 @@ export class RegisterComponent implements OnInit {
   message: string;
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UsersService) { }
+              private userService: UsersService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -41,7 +43,7 @@ export class RegisterComponent implements OnInit {
       
       
       this.userService.post(user).subscribe(response => {
-        console.log(response);
+        this.router.navigate(['./../']);
       });
 
       
